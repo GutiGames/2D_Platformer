@@ -1,6 +1,5 @@
 package main.java.jonanguti.platformer;
 
-
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
