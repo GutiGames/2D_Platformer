@@ -27,9 +27,12 @@ public class MenuState extends GameState {
             bg.setVector(-0.1, 0);
 
             titleColor = new Color(120, 36, 44);
-            titleFont = new Font("Arial", Font.PLAIN, 28);
+            titleFont = new Font("Algerian", Font.PLAIN, 30);
 
-            font = new Font("Arial", Font.PLAIN, 12);
+
+
+
+            font = new Font("Arial", Font.BOLD, 14);
 
         }
         catch (Exception e){
@@ -49,7 +52,7 @@ public class MenuState extends GameState {
         //Title
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("Platformer", 80, 70);
+        g.drawString("Lost Empire", 70, 70);
 
         //Menu
         g.setFont(font);
@@ -58,19 +61,22 @@ public class MenuState extends GameState {
 
             if (i == currentChoice){
                 g.setColor(Color.BLACK);
+                g.setFont(new Font("Arial", Font.BOLD, 16));
 
             }
             else{
                 g.setColor(Color.RED);
+                g.setFont(font);
             }
 
-            g.drawString(options [i], 145, 140 + i * 15);
+            g.drawString(options [i], 145, 140 + i * 20);
         }
     }
 
     private void select(){
         if (currentChoice == 0){
-            //TODO Start
+            gsm.setState(gsm.LEVEL1STATE);
+
 
         }
         if (currentChoice == 1){

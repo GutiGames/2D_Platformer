@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="2D_Platformer:jar">
+    <output-path>$PROJECT_DIR$/out/production/Platformer/artifacts/2D_Platformer_jar</output-path>
+    <root id="archive" name="2D_Platformer.jar">
+      <element id="module-output" name="2D_Platformer" />
+    </root>
+  </artifact>
+</component>

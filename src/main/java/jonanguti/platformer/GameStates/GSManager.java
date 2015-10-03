@@ -16,6 +16,7 @@ public class GSManager {
 
         currentState = 0;
         gameStates.add(new MenuState(this));
+        gameStates.add(new Lv1State(this));
 
 
     }
