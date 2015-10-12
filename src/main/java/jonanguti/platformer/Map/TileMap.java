@@ -9,13 +9,11 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class TileMap {
-
-    //Position
+public class TileMap {// position
     private double x;
     private double y;
 
-    //Bounds
+    // bounds
     private int xmin;
     private int ymin;
     private int xmax;
@@ -44,11 +42,9 @@ public class TileMap {
 
     public TileMap (int tileSize){
         this.tileSize = tileSize;
-        numRowsToDraw = GamePanel.HEIGHT / tileSize + 4;
-        numColsToDraw = GamePanel.WIDTH / tileSize + 4;
-
+        numRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
+        numColsToDraw = GamePanel.WIDTH / tileSize + 2;
         tween = 0.07;
-
     }
 
     public void loadTiles(String s){
@@ -93,98 +89,110 @@ public class TileMap {
             width = numCols * tileSize;
             height = numRows * tileSize;
 
+            xmin = GamePanel.WIDTH - width;
+            xmax = 0;
+            ymin = GamePanel.HEIGHT - height;
+            ymax = 0;
+
             String delims = "\\s+";
-            for (int row = 0; row < numRows; row++ ){
+            for(int row = 0; row < numRows; row++) {
                 String line = br.readLine();
-                String tokens[] = line.split(delims);
-                for (int col = 0; col < numCols; col++){
-                    map [row][col] = Integer.parseInt(tokens[col]);
-
+                String[] tokens = line.split(delims);
+                for(int col = 0; col < numCols; col++) {
+                    map[row][col] = Integer.parseInt(tokens[col]);
                 }
-
             }
+
         }
-        catch (Exception e){
+        catch(Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public int getTileSize(){
+    public int getTileSize() {
         return tileSize;
 
     }
 
-    public int getx(){
+    public int getx() {
         return (int)x;
 
     }
 
-    public int gety(){
+    public int gety() {
         return (int)y;
 
     }
-
-    public int getWidth(){
+    public int getWidth() {
         return width;
 
     }
-    public int getHeight(){
+
+    public int getHeight() {
         return height;
 
     }
 
-    public int getype(int row, int col){
 
+    public int getType(int row, int col){
         int rc = map[row][col];
         int r = rc / numTilesAcross;
         int c = rc % numTilesAcross;
         return tiles[r][c].getType();
     }
 
+    public void setTween(double d) {
+        tween = d;
+
+    }
+
     public void setPosition(double x, double y) {
+
+        System.out.println(this.x);
+        System.out.println((x - this.x) * tween);
 
         this.x += (x - this.x) * tween;
         this.y += (y - this.y) * tween;
 
+        System.out.println(this.x + "\n==========");
+
         fixBounds();
 
-        colOffset = (int) - this.x / tileSize;
-        rowOffset = (int) - this.y / tileSize;
+        colOffset = (int)-this.x / tileSize;
+        rowOffset = (int)-this.y / tileSize;
 
     }
 
-    private void fixBounds(){
-        if (x < xmin) x = xmin;
-        if (y < ymin) y = ymin;
-        if (x > xmax) x = xmax;
-        if (x > ymax) x = ymax;
-
+    private void fixBounds() {
+        if(x < xmin) x = xmin;
+        if(y < ymin) y = ymin;
+        if(x > xmax) x = xmax;
+        if(y > ymax) y = ymax;
     }
 
-    public void draw(Graphics2D g){
+    public void draw(Graphics2D g) {
 
-        for (int row = rowOffset; row < rowOffset + numRowsToDraw; row++){
+        for (int row = rowOffset; row < rowOffset + numRowsToDraw; row++) {
 
-            if (row >= numRows)break;
+            if(row >= numRows) break;
 
-            for (int col = rowOffset; col < rowOffset + numRowsToDraw; col++){
+            for (int col = colOffset; col < colOffset + numColsToDraw; col++) {
 
-                if (row >= numCols)break;
+                if(col >= numCols) break;
 
-                if (map[row][col] == 0)continue;
+                if(map[row][col] == 0) continue;
 
                 int rc = map[row][col];
                 int r = rc / numTilesAcross;
                 int c = rc % numTilesAcross;
 
-                g.drawImage(tiles[r][c].getImage(), (int) x + col * tileSize,(int) y + row  * tileSize,null );
-
+                g.drawImage(tiles[r][c].getImage(), (int)x + col * tileSize, (int)y + row * tileSize, null);
 
             }
 
         }
-    }
 
+    }
 
 }

@@ -58,7 +58,7 @@ public class Player extends MapObject {
 
         moveSpeed = 0.3;
         maxSpeed = 1.6;
-        stopSped = 0.4;
+        stopSpeed = 0.4;
         fallSpeed = 0.15;
         maxFallSpeed = 4.0;
         jumpStart = -4.8;
@@ -168,7 +168,7 @@ public class Player extends MapObject {
 
         else{
             if (dx > 0){
-                dx -= stopSped;
+                dx -= stopSpeed;
 
                 if (dx < 0){
                     dx = 0;
@@ -178,7 +178,7 @@ public class Player extends MapObject {
             }
 
             else if (dx < 0){
-                dx += stopSped;
+                dx += stopSpeed;
 
                 if (dx > 0){
                     dx = 0;
@@ -228,8 +228,8 @@ public class Player extends MapObject {
 
         //Position
         getNextPosition();
-        checkTileMapCollition();
-        setPosition(xTemp, yTemp);
+        checkTileMapCollision();
+        setPosition(xtemp, ytemp);
 
         //Animation
         if (melleAt){
