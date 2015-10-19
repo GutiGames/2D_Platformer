@@ -6,6 +6,8 @@ import main.java.jonanguti.platformer.Map.Background;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class MenuState extends GameState {
 
@@ -96,7 +98,7 @@ public class MenuState extends GameState {
             select();
         }
 
-        if (k == KeyEvent.VK_UP){
+        if (k == KeyEvent.VK_W){
             currentChoice--;
 
             if (currentChoice == -1){
@@ -105,7 +107,7 @@ public class MenuState extends GameState {
 
         }
 
-        if (k == KeyEvent.VK_DOWN){
+        if (k == KeyEvent.VK_S){
             currentChoice++;
 
             if (currentChoice == options.length){
